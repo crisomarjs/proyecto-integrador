@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>API</title>
+</head>
+<body>
+
+    <div class="container mt-4 show-lg p3 mb-5 bg-body rounted">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>OPEN</th>
+                    <th>HIGH</th>
+                    <th>LOW</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+
+            </tbody>
+        </table>
+    </div
+
+    
+      
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script>
+        let url = 'https://api.marketstack.com/v1/eod?access_key=5cbf6c53b535505bb8ce5870bb8b5795&symbols=WDP.XFRA'
+        fetch(url)
+            .then( response => response.json() )
+            .then( data => mostrarData(data) )
+            .catch( error => console.log(error) )
+
+        const mostrarData = (data) => {
+            console.log(data.data[0])
+            let body = ""
+            for (var i = 0; i < data.data.length; i++) { 
+                console.log("data",data.data[i].open)     
+               body+=`<tr><td>${data.data[i].open}</td><td> ${data.data[i].high}</td> <td>${data.data[i].low}</td> </tr>`
+            }
+            document.getElementById('data').innerHTML = body
+            //console.log(body)
+        }
+
+    </script>
+
+
+</body>
+</html>
